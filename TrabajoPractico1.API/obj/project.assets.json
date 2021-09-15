@@ -1,0 +1,113 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "TrabajoPractico1.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "TrabajoPractico1.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TrabajoPractico1.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrabajoPractico1.Application.dll": {}
+        }
+      },
+      "TrabajoPractico1.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/TrabajoPractico1.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrabajoPractico1.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TrabajoPractico1.Application/1.0.0": {
+      "type": "project",
+      "path": "../TrabajoPractico1.Application/TrabajoPractico1.Application.csproj",
+      "msbuildProject": "../TrabajoPractico1.Application/TrabajoPractico1.Application.csproj"
+    },
+    "TrabajoPractico1.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TrabajoPractico1.Domain/TrabajoPractico1.Domain.csproj",
+      "msbuildProject": "../TrabajoPractico1.Domain/TrabajoPractico1.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "TrabajoPractico1.Application >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\emiliano.salvatori\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.API\\TrabajoPractico1.API.csproj",
+      "projectName": "TrabajoPractico1.API",
+      "projectPath": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.API\\TrabajoPractico1.API.csproj",
+      "packagesPath": "C:\\Users\\emiliano.salvatori\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.API\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\emiliano.salvatori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.Application\\TrabajoPractico1.Application.csproj": {
+              "projectPath": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.Application\\TrabajoPractico1.Application.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
