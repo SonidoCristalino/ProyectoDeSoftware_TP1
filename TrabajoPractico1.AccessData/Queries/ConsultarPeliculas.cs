@@ -6,16 +6,49 @@ using TrabajoPractico1.Domain.Entities;
 namespace TrabajoPractico1.AccessData.Queries
 {
     
-    public class ConsultarPeliculas
+    public class Consultas
     {
-        public IList<Peliculas> mostrarPeliculas()
+        public IList<Peliculas> mostrarPeliculas(int peliID)
         {
             using (var saraza = new CineDbContext() ) {
-                var x = saraza.Peliculas.ToList();
+                
+                var x = saraza.Peliculas.Where(
+                    algo => algo.PeliculaId == peliID
+                    ).ToList();
+                
                 return x;
             }
 
         }
+
+        public IList<Peliculas> mostrarTodasLasPeliculas()
+        {
+            using (var saraza = new CineDbContext())
+            {
+
+                var x = saraza.Peliculas.ToList();
+
+                return x;
+            }
+
+        }
+
+        public IList<Peliculas> mostrarFuncion(int peliculaID)
+        {
+            using (var saraza = new CineDbContext())
+            {
+                //Busca la función de una película cuyo titulo se pase por parametro
+
+                var x = saraza.Funciones
+                    .Where(
+                        peli => peli.PeliculaId.Equals(peliculaID))
+                    .ToList();
+
+                return x;
+            }
+
+        }
+
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using TrabajoPractico1.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace TrabajoPractico1.AccessData
 {
@@ -75,6 +76,10 @@ namespace TrabajoPractico1.AccessData
             modelBuilder.Entity<Peliculas>().HasData(
                 new Peliculas { PeliculaId = 1, Titulo = "Pelicula_1", Poster ="Poster1", Sinopsis = "Sinopsis1", Trailer="Trailer1" },
                 new Peliculas { PeliculaId = 2, Titulo = "Pelicula_2", Poster = "Poster2", Sinopsis = "Sinopsis2", Trailer = "Trailer2" }
+            );
+
+            modelBuilder.Entity<Funciones>().HasData(
+                new Funciones { PeliculaId = 1, SalaId = 1, Fecha = Convert.ToDateTime("2021-09-06"), Horario = new TimeSpan(1) }
             );
 
         }
