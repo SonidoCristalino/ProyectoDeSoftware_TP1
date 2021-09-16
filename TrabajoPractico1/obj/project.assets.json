@@ -5,7 +5,7 @@
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Humanizer.dll": {}
+          "lib/netstandard2.0/_._": {}
         },
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {}
@@ -1519,6 +1519,51 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "TrabajoPractico1.AccessData/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10",
+          "TrabajoPractico1.Application": "1.0.0",
+          "TrabajoPractico1.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TrabajoPractico1.AccessData.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrabajoPractico1.AccessData.dll": {}
+        }
+      },
+      "TrabajoPractico1.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10",
+          "TrabajoPractico1.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TrabajoPractico1.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrabajoPractico1.Application.dll": {}
+        }
+      },
+      "TrabajoPractico1.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10"
+        },
+        "compile": {
+          "bin/placeholder/TrabajoPractico1.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrabajoPractico1.Domain.dll": {}
         }
       }
     }
@@ -5788,6 +5833,21 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "TrabajoPractico1.AccessData/1.0.0": {
+      "type": "project",
+      "path": "../TrabajoPractico1.AccessData/TrabajoPractico1.AccessData.csproj",
+      "msbuildProject": "../TrabajoPractico1.AccessData/TrabajoPractico1.AccessData.csproj"
+    },
+    "TrabajoPractico1.Application/1.0.0": {
+      "type": "project",
+      "path": "../TrabajoPractico1.Application/TrabajoPractico1.Application.csproj",
+      "msbuildProject": "../TrabajoPractico1.Application/TrabajoPractico1.Application.csproj"
+    },
+    "TrabajoPractico1.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TrabajoPractico1.Domain/TrabajoPractico1.Domain.csproj",
+      "msbuildProject": "../TrabajoPractico1.Domain/TrabajoPractico1.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5795,7 +5855,10 @@
       "Microsoft.EntityFrameworkCore >= 5.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.10",
-      "Microsoft.EntityFrameworkCore.Tools >= 5.0.10"
+      "Microsoft.EntityFrameworkCore.Tools >= 5.0.10",
+      "TrabajoPractico1.AccessData >= 1.0.0",
+      "TrabajoPractico1.Application >= 1.0.0",
+      "TrabajoPractico1.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5829,7 +5892,17 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.AccessData\\TrabajoPractico1.AccessData.csproj": {
+              "projectPath": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.AccessData\\TrabajoPractico1.AccessData.csproj"
+            },
+            "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.Application\\TrabajoPractico1.Application.csproj": {
+              "projectPath": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.Application\\TrabajoPractico1.Application.csproj"
+            },
+            "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.Domain\\TrabajoPractico1.Domain.csproj": {
+              "projectPath": "C:\\Users\\emiliano.salvatori\\source\\repos\\ProyectoDeSoftware_TP1\\TrabajoPractico1.Domain\\TrabajoPractico1.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

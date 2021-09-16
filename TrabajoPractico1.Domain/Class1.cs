@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TrabajoPractico1.Domain
+﻿namespace TrabajoPractico1.Domain
 {
     public class Class1
     {

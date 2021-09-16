@@ -18,4 +18,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrabajoPractico1.AccessData\TrabajoPractico1.AccessData.csproj" />
+    <ProjectReference Include="..\TrabajoPractico1.Application\TrabajoPractico1.Application.csproj" />
+    <ProjectReference Include="..\TrabajoPractico1.Domain\TrabajoPractico1.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

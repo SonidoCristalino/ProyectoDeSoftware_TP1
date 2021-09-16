@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TrabajoPractico1.Domain.Entities
 {
@@ -11,8 +10,8 @@ namespace TrabajoPractico1.Domain.Entities
         public int SalaId { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan Horario { get; set; }
-        public Peliculas PeliculasNavigator { get; set; }
-        public Salas SalasNavigator { get; set; }
-        public IList<Tickets> TicketsNavigator { get; set; }
+        public Peliculas Peliculas { get; set; }
+        public Salas Salas{ get; set; }
+        public IList<Tickets> Tickets { get; set; }
     }
 }

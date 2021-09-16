@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TrabajoPractico1.AccessData",
+    "\\TrabajoPractico1.AccessData\\Commands",
+    "\\TrabajoPractico1.AccessData\\Queries",
+    "\\TrabajoPractico1.Domain\\Entities"
   ],
-  "SelectedNode": "\\C:\\Users\\emiliano.salvatori\\Source\\Repos\\ProyectoDeSoftware_TP1",
+  "SelectedNode": "\\TrabajoPractico1.AccessData\\CineDbContext.cs",
   "PreviewInSolutionExplorer": false
 }
