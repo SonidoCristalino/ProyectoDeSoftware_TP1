@@ -6,29 +6,29 @@ using TrabajoPractico1.Domain.Entities;
 namespace TrabajoPractico1.AccessData.Queries
 {
     
-    public class Consultas
+    public class ConsultasDePeliculas
     {
-        public IList<Peliculas> mostrarPeliculas(int peliID)
+        public IList<Peliculas> buscarPelicula(int peliID)
         {
-            using (var saraza = new CineDbContext() ) {
+            using ( var contex = new CineDbContext() ) 
+            {
+                var selecccion = contex.Peliculas
+                    .Where(id => id.PeliculaId == peliID)
+                    .ToList();
                 
-                var x = saraza.Peliculas.Where(
-                    algo => algo.PeliculaId == peliID
-                    ).ToList();
-                
-                return x;
+                return selecccion;
             }
 
         }
 
         public IList<Peliculas> mostrarTodasLasPeliculas()
         {
-            using (var saraza = new CineDbContext())
+            using (var context= new CineDbContext())
             {
 
-                var x = saraza.Peliculas.ToList();
+                var seleccion = context.Peliculas.ToList();
 
-                return x;
+                return seleccion;
             }
 
         }
