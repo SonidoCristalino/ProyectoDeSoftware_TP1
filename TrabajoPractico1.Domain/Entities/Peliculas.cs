@@ -10,7 +10,7 @@ namespace TrabajoPractico1.Domain.Entities
         public string Poster { get; set; }
         public string Sinopsis { get; set; }
         public string Trailer { get; set; }
-        public IList<Funciones> Funciones { get; set; }
+        public virtual IList<Funciones> Funciones { get; set; }
 
     }
 }

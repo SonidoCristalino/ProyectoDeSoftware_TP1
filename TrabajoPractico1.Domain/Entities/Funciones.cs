@@ -12,6 +12,6 @@ namespace TrabajoPractico1.Domain.Entities
         public TimeSpan Horario { get; set; }
         public Peliculas Peliculas { get; set; }
         public Salas Salas{ get; set; }
-        public IList<Tickets> Tickets { get; set; }
+        public virtual IList<Tickets> Tickets { get; set; }
     }
 }

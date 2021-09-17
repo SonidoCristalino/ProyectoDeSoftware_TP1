@@ -6,6 +6,6 @@ namespace TrabajoPractico1.Domain.Entities
     {
         public int SalaId { get; set; }
         public int Capacidad { get; set; }
-        public IList<Funciones> Funciones { get; set; }
+        public virtual IList<Funciones> Funciones { get; set; }
     }
 }

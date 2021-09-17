@@ -6,10 +6,6 @@ namespace TrabajoPractico1.AccessData
 {
     public class CineDbContext : DbContext
     {
-        //public CineDbContext(DbContextOptions<CineDbContext> options)
-        //    : base(options)
-        //{
-        //}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -74,13 +70,19 @@ namespace TrabajoPractico1.AccessData
             );
 
             modelBuilder.Entity<Peliculas>().HasData(
-                new Peliculas { PeliculaId = 1, Titulo = "Pelicula_1", Poster ="Poster1", Sinopsis = "Sinopsis1", Trailer="Trailer1" },
-                new Peliculas { PeliculaId = 2, Titulo = "Pelicula_2", Poster = "Poster2", Sinopsis = "Sinopsis2", Trailer = "Trailer2" }
+                new Peliculas { PeliculaId = 1, Titulo = "El Señor de los Anillos: la Comunidad del Anillo",    Poster = "Poster1", Sinopsis = "Sinopsis1", Trailer = "Trailer1" },
+                new Peliculas { PeliculaId = 2, Titulo = "El Señor de los Anillos: las dos torres",             Poster = "Poster2", Sinopsis = "Sinopsis2", Trailer = "Trailer2" },
+                new Peliculas { PeliculaId = 3, Titulo = "El Señor de los Anillos: el retorno del Rey",         Poster = "Poster3", Sinopsis = "Sinopsis3", Trailer = "Trailer3" },
+                new Peliculas { PeliculaId = 4, Titulo = "Spider-Man",                                          Poster = "Poster4", Sinopsis = "Sinopsis4", Trailer = "Trailer4" },
+                new Peliculas { PeliculaId = 5, Titulo = "Spider-Man 2",                                        Poster = "Poster5", Sinopsis = "Sinopsis5", Trailer = "Trailer5" },
+                new Peliculas { PeliculaId = 6, Titulo = "Spider-Man 3",                                        Poster = "Poster6", Sinopsis = "Sinopsis6", Trailer = "Trailer6" },
+                new Peliculas { PeliculaId = 7, Titulo = "The Amazing Spider-Man",                              Poster = "Poster7", Sinopsis = "Sinopsis7", Trailer = "Trailer7" },
+                new Peliculas { PeliculaId = 8, Titulo = "Spider-Man: Un nuevo universo",                       Poster = "Poster8", Sinopsis = "Sinopsis8", Trailer = "Trailer8" }
             );
 
             modelBuilder.Entity<Funciones>().HasData(
-                new Funciones { PeliculaId = 1, SalaId = 1, Fecha = Convert.ToDateTime("2021-09-06"), Horario = new TimeSpan(1) }
-            );
+                new Funciones { FuncionId = 1, PeliculaId = 1, SalaId = 1, Fecha = Convert.ToDateTime("2021-09-06"), Horario = new TimeSpan(10) }
+            ); ;
 
         }
     }

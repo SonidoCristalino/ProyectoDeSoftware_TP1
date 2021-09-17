@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrabajoPractico1.AccessData;
 
 namespace TrabajoPractico1.AccessData.Migrations
 {
     [DbContext(typeof(CineDbContext))]
-    partial class CineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210916062451_nuevaFuncion")]
+    partial class nuevaFuncion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,16 +55,6 @@ namespace TrabajoPractico1.AccessData.Migrations
                     b.HasIndex("SalasSalaId");
 
                     b.ToTable("Funciones");
-
-                    b.HasData(
-                        new
-                        {
-                            FuncionId = 1,
-                            Fecha = new DateTime(2021, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Horario = new TimeSpan(10),
-                            PeliculaId = 1,
-                            SalaId = 1
-                        });
                 });
 
             modelBuilder.Entity("TrabajoPractico1.Domain.Entities.Peliculas", b =>

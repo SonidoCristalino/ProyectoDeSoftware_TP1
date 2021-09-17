@@ -33,7 +33,7 @@ namespace TrabajoPractico1.AccessData.Queries
 
         }
 
-        public IList<Peliculas> mostrarFuncion(int peliculaID)
+        public IList<Funciones> mostrarFuncion(int peliculaID)
         {
             using (var saraza = new CineDbContext())
             {
@@ -41,7 +41,7 @@ namespace TrabajoPractico1.AccessData.Queries
 
                 var x = saraza.Funciones
                     .Where(
-                        peli => peli.PeliculaId.Equals(peliculaID))
+                        funcion => funcion.PeliculaId.Equals(peliculaID))
                     .ToList();
 
                 return x;

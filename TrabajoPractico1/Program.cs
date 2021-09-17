@@ -22,8 +22,12 @@ namespace TrabajoPractico1
             {
                 Console.WriteLine("La pelicula es " + x.Titulo);
             }
-            
 
+            Console.WriteLine("Se muestran las funciones que tengan un mismo ID: \n");
+            foreach (var x in consultar.mostrarFuncion(1))
+            {
+                Console.WriteLine("La pelicula es " + x.PeliculaId + " Y la sala es: " + x.Fecha);
+            }
         }
     }
 }
