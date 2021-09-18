@@ -81,7 +81,9 @@ namespace TrabajoPractico1.AccessData
             );
 
             modelBuilder.Entity<Funciones>().HasData(
-                new Funciones { FuncionId = 1, PeliculaId = 1, SalaId = 1, Fecha = Convert.ToDateTime("2021-09-06"), Horario = new TimeSpan(10,30,00) }
+                new Funciones { FuncionId = 1, PeliculaId = 1, SalaId = 1, Fecha = Convert.ToDateTime("2021-09-06"), Horario = new TimeSpan(10,30,00)},
+                new Funciones { FuncionId = 2, PeliculaId = 2, SalaId = 2, Fecha = Convert.ToDateTime("2021-09-12"), Horario = new TimeSpan(12, 30, 00)},
+                new Funciones { FuncionId = 3, PeliculaId = 5, SalaId = 3, Fecha = Convert.ToDateTime("2021-09-15"), Horario = new TimeSpan(09, 15, 00) }
             ); ;
 
         }
