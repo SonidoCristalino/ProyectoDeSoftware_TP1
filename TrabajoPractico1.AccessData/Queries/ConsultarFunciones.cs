@@ -6,7 +6,7 @@ namespace TrabajoPractico1.AccessData.Queries
 {
     public class ConsultasDeFunciones
     {
-        public IList<Funciones> buscarFuncionesPorPeliculaID(int peliID)
+        public IList<Funciones> BuscarFuncionesPorPeliculaID(int peliID)
         {
             using (var cine = new CineDbContext())
             {
@@ -19,7 +19,7 @@ namespace TrabajoPractico1.AccessData.Queries
 
         }
 
-        public IList<Funciones> buscarFuncionesPorID(int funcionID)
+        public IList<Funciones> BuscarFuncionesPorID(int funcionID)
         {
             using (var cine = new CineDbContext())
             {
@@ -28,6 +28,18 @@ namespace TrabajoPractico1.AccessData.Queries
                     .ToList();
 
                 return selecccion;
+            }
+
+        }
+
+        public Funciones ObtenerFuncionPorID(int funcionID)
+        {
+            using (var cine = new CineDbContext())
+            {
+                var seleccion = cine.Funciones
+                    .Where(Funcion => Funcion.FuncionId == funcionID);
+
+                return seleccion.First();
             }
 
         }

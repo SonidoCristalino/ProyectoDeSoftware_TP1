@@ -22,6 +22,9 @@ namespace TrabajoPractico1
         TrabajoPractico1.AccessData.Queries.ConsultasDeTickets ConsultasDeTickets =
             new AccessData.Queries.ConsultasDeTickets();
 
+        TrabajoPractico1.AccessData.Commands.TicketsABM TicketsABM =
+            new AccessData.Commands.TicketsABM();
+
         public Menu(int valor)
         {
             opcion = valor;
@@ -107,7 +110,7 @@ namespace TrabajoPractico1
             Console.WriteLine("\t\t\t************************************************");
             Console.WriteLine("\t\t\t* Las funciones disponibles para esa opción son:*");
             Console.WriteLine("\t\t\t*************************************************\n");
-            foreach (var funcion in consultasDeFunciones.buscarFuncionesPorPeliculaID(opcion))
+            foreach (var funcion in consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion))
             {
                 Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
                 Console.WriteLine("\tSala nº:\t" + funcion.SalaId);
@@ -134,7 +137,7 @@ namespace TrabajoPractico1
         public void opcion_Nro3(int idFuncion)
         {
             
-            int funcionID = 1;
+            int salaID = 0;
             int capacidad = 0;
             int TicketXFuncion= 0;
 
@@ -144,11 +147,15 @@ namespace TrabajoPractico1
             Console.Write("Ingrese la Función a la que quiere asistir: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
-            //Se lee la capacidad asociada a la sala de la Función
-            capacidad = ConsultasDeSalas.buscarSalaPorID(opcion).Capacidad;
-            
             //Se obtiene la cantidad de tickets generados por Función
-            TicketXFuncion = ConsultasDeTickets.buscarTicketPorFuncion(funcionID).Count;
+            TicketXFuncion = ConsultasDeTickets.buscarTicketPorFuncion(opcion).Count;
+
+            //Obtenemos el ID de la Sala asociada a la Función
+            salaID = consultasDeFunciones.ObtenerFuncionPorID(opcion).SalaId;
+            
+            //Se lee la capacidad asociada a la Sala
+            capacidad = ConsultasDeSalas.buscarSalaPorID(opcion).Capacidad;
+
 
             //Comparamos para ver si es posible obtener un nuevo ticket
             if (TicketXFuncion < capacidad)
