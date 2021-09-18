@@ -45,6 +45,18 @@ namespace TrabajoPractico1.AccessData.Queries
 
         }
 
+        public int contarPeliculas()
+        {
+            using (var cine = new CineDbContext())
+            {
+
+                var seleccion = cine.Peliculas.ToList();
+
+                return seleccion.Count();
+            }
+
+        }
+
     }
 }
 

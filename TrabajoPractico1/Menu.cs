@@ -21,6 +21,8 @@ namespace TrabajoPractico1
         {
             opcion = valor;
 
+            //sería mejor trabajar todas las películas por ID y listo, para no estar con un contador
+            //contador = consultarPelicula.contarPeliculas();
             this.menuPrincipal(opcion);
         }
 
@@ -52,15 +54,12 @@ namespace TrabajoPractico1
 
                     case 3:
                         Console.Write("Su opción es: " + opcion);
-                        //Console.Clear();
                         break;
                     case 4:
                         Console.Write("Su opción es: " + opcion);
-                        //Console.Clear();
                         break;
                     case 5:
-                        //Console.Write("Su opción es: " + opcion);
-                        //Console.Clear();
+                        Console.Write("Su opción es: " + opcion);
                         break;
                     default:
                         Console.WriteLine("ERROR: Opción inválida. Apriete cualquier número y vuelva a intentarlo");
@@ -72,9 +71,7 @@ namespace TrabajoPractico1
 
         public void opcion_Nro1()
         {
-            //TrabajoPractico1.AccessData.Queries.ConsultasDePeliculas consultarPelicula =
-            //    new TrabajoPractico1.AccessData.Queries.ConsultasDePeliculas();
-
+            
             Console.Clear();
             Console.WriteLine("");
             Console.WriteLine("\t\t\t*******************************************");
@@ -91,12 +88,10 @@ namespace TrabajoPractico1
 
         public void opcion_Nro2()
         {
-            //TrabajoPractico1.AccessData.Queries.ConsultasDeFunciones consultasDeFunciones =
-            //    new AccessData.Queries.ConsultasDeFunciones();
-
-            Console.Write("Ingrese le película para ver sus funciones: ");
+            
+            Console.Write("Ingrese la película para ver sus funciones: ");
             opcion = Convert.ToInt32(Console.ReadLine());
-            //if (opcion > 1 && opcion < contador)    
+            
             if (opcion < 1 || opcion > contador)
             {
 
@@ -110,7 +105,7 @@ namespace TrabajoPractico1
                 Console.WriteLine("\t\t\t************************************************");
                 Console.WriteLine("\t\t\t* Las funciones disponibles para esa opción son:*");
                 Console.WriteLine("\t\t\t*************************************************\n");
-                foreach (var funcion in consultasDeFunciones.buscarFuncionesPorID(1))
+                foreach (var funcion in consultasDeFunciones.buscarFuncionesPorID(opcion))
                 {
                     Console.WriteLine("\tFunción nº: " + funcion.PeliculaId);
                     Console.WriteLine("\t\tSala nº: " + funcion.SalaId);
