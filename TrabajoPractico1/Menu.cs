@@ -79,8 +79,7 @@ namespace TrabajoPractico1
             Console.WriteLine("\t\t\t*******************************************\n");
             foreach (var pelicula in consultarPelicula.buscarTodasLasPeliculas())
             {
-                Console.WriteLine("\tPelicula nº " + contador + ": " + pelicula.Titulo);
-                contador++;
+                Console.WriteLine("\tPelicula nº " + pelicula.PeliculaId + ": " + pelicula.Titulo);
             }
             Console.WriteLine("");
 
@@ -107,10 +106,10 @@ namespace TrabajoPractico1
                 Console.WriteLine("\t\t\t*************************************************\n");
                 foreach (var funcion in consultasDeFunciones.buscarFuncionesPorID(opcion))
                 {
-                    Console.WriteLine("\tFunción nº: " + funcion.PeliculaId);
-                    Console.WriteLine("\t\tSala nº: " + funcion.SalaId);
-                    Console.WriteLine("\t\tDía: " + funcion.Fecha);
-                    Console.WriteLine("\t\tHorario: " + funcion.Horario);
+                    Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
+                    Console.WriteLine("\tSala nº:\t" + funcion.SalaId);
+                    Console.WriteLine("\tDía:\t\t{0:d}", funcion.Fecha);
+                    Console.WriteLine("\tHorario:\t", funcion.Horario.ToString("hh"));
                 }
                 Console.WriteLine("");
 
