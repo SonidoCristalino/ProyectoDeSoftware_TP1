@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using TrabajoPractico1.Domain.Entities;
 
-
 namespace TrabajoPractico1.AccessData.Queries
 {
-    
     public class ConsultasDePeliculas
     {
         public IList<Peliculas> buscarPelicula(int peliID)
         {
-            using ( var contex = new CineDbContext() ) 
+            using ( var cine = new CineDbContext() ) 
             {
-                var selecccion = contex.Peliculas
-                    .Where(id => id.PeliculaId == peliID)
+                var selecccion = cine.Peliculas
+                    .Where(pelicula => pelicula.PeliculaId == peliID)
                     .ToList();
                 
                 return selecccion;
@@ -21,30 +19,28 @@ namespace TrabajoPractico1.AccessData.Queries
 
         }
 
-        public IList<Peliculas> mostrarTodasLasPeliculas()
+        public IList<Peliculas> buscarTodasLasPeliculas()
         {
-            using (var context= new CineDbContext())
+            using (var cine= new CineDbContext())
             {
 
-                var seleccion = context.Peliculas.ToList();
+                var seleccion = cine.Peliculas.ToList();
 
                 return seleccion;
             }
 
         }
 
-        public IList<Funciones> mostrarFuncion(int peliculaID)
+        public IList<Peliculas> buscarPeliculaPorNombre(string nombre)
         {
-            using (var saraza = new CineDbContext())
+            using (var cine = new CineDbContext())
             {
-                //Busca la función de una película cuyo titulo se pase por parametro
 
-                var x = saraza.Funciones
-                    .Where(
-                        funcion => funcion.PeliculaId.Equals(peliculaID))
-                    .ToList();
+                var seleccion = cine.Peliculas
+                        .Where(pelicula => pelicula.Titulo.ToLower().Contains(nombre.ToLower()))
+                        .ToList();
 
-                return x;
+                return seleccion;
             }
 
         }
