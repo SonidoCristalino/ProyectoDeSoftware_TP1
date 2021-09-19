@@ -6,7 +6,7 @@ namespace TrabajoPractico1.AccessData.Queries
 {
     public class ConsultasDePeliculas
     {
-        public IList<Peliculas> buscarPelicula(int peliID)
+        public Peliculas buscarPeliculaPorId(int peliID)
         {
             using ( var cine = new CineDbContext() ) 
             {
@@ -14,7 +14,7 @@ namespace TrabajoPractico1.AccessData.Queries
                     .Where(pelicula => pelicula.PeliculaId == peliID)
                     .ToList();
                 
-                return selecccion;
+                return selecccion.First();
             }
 
         }

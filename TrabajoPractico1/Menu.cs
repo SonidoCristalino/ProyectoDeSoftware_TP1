@@ -59,12 +59,15 @@ namespace TrabajoPractico1
                     case 2:
                         
                         Console.Clear();
+                        this.opcion_Nro1();
                         this.opcion_Nro2();
                         break;
 
                     case 3:
                         
                         Console.Clear();
+                        this.opcion_Nro1();
+                        this.opcion_Nro2();
                         this.opcion_Nro3();
                         break;
                     
@@ -102,11 +105,9 @@ namespace TrabajoPractico1
         public void opcion_Nro2()
         {
             int id_funcion = 0;
-
-            this.opcion_Nro1();
             
             Console.WriteLine("");
-            Console.Write("Ingrese el número de la película para ver sus funciones: ");
+            Console.Write("Ingrese el número de la Película para ver sus funciones: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
             bool hayFunciones = consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion).Any();
@@ -138,7 +139,6 @@ namespace TrabajoPractico1
            
         }
 
-        //public void opcion_Nro3(int idFuncion)
         public void opcion_Nro3()
         {
             
@@ -146,9 +146,8 @@ namespace TrabajoPractico1
             int capacidad = 0;
             int TicketXFuncion= 0;
 
-            this.opcion_Nro1();
-
-            Console.Write("Ingrese la Función a la que quiere asistir: ");
+            Console.WriteLine("");
+            Console.Write("Ingrese el número de Función a la que quiere asistir: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
             //Se obtiene la cantidad de tickets generados por Función
@@ -166,8 +165,21 @@ namespace TrabajoPractico1
                 Console.Write("\nIngrese su nombre para generar su nuevo ticket: ");
                 string nombreUsuario = Console.ReadLine();
 
-                //Creamos un nuevo ticket
-                TicketsABM.AltaTicket(Guid.NewGuid(), opcion, nombreUsuario);
+                //Creamos el contexto para generar un nuevo Ticket
+                TrabajoPractico1.AccessData.Commands.TicketsABM nuevoTicket =
+                    new AccessData.Commands.TicketsABM();
+             
+                var cine = new TrabajoPractico1.AccessData.CineDbContext();
+
+                //Creamos el ticket
+                Guid nuevoTicketID = Guid.NewGuid();
+                cine.Tickets.Add(nuevoTicket.AltaTicket(nuevoTicketID, opcion, nombreUsuario));
+                cine.SaveChanges();
+
+                Console.WriteLine("El ticket se ha creado exitosamente: ");
+                Console.WriteLine("\tNúmero de ticket: {0}", nuevoTicketID.ToString());
+                Console.WriteLine("\tAsociado al nombre: {0}", nombreUsuario);
+
             }
             else
             {
@@ -186,20 +198,38 @@ namespace TrabajoPractico1
 
             foreach (var funcion in consultasDeFunciones.ObtenerTodasLasFunciones())
             {
-                Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
-                Console.WriteLine("\tSala nº:\t" + funcion.SalaId);
-                Console.WriteLine("\tDía:\t\t{0:d}", funcion.Fecha);
-                Console.WriteLine("\tHorario:\t" + funcion.Horario.ToString(@"hh\:mm"));
+                int CantTicketsFuncion = ConsultasDeTickets.buscarTicketPorFuncion(funcion.FuncionId).Count();
+                int capacidadSala = ConsultasDeSalas.buscarSalaPorID(funcion.SalaId).Capacidad;
+                string nombrePelicula = consultarPelicula.buscarPeliculaPorId(funcion.PeliculaId).Titulo;
+                string mensajeAgotado = "";
+
+                if (CantTicketsFuncion == capacidadSala)
+                {
+                    mensajeAgotado = " (¡¡AGOTADO!!)";
+                }
+
+                Console.WriteLine("\tFunción nº:.......... {0}", funcion.FuncionId);
+                Console.WriteLine("\tPelícula nº:......... {0} - {1}", funcion.PeliculaId, nombrePelicula);
+                Console.WriteLine("\tTickets Vendidos:.... {0}{1}", CantTicketsFuncion, mensajeAgotado);
+                Console.WriteLine("\tSala nº:............. {0}", funcion.SalaId);
+                Console.WriteLine("\tCapacidad............ {0} personas", capacidadSala);
+                Console.WriteLine("\tDía:................. {0:d}", funcion.Fecha);
+                Console.WriteLine("\tHorario:............. {0} hs.", funcion.Horario.ToString(@"hh\:mm"));
                 Console.WriteLine("");
             }
             
             Console.WriteLine("");
-            Console.Write("¿Por cuál Función desea consultar los tickets?: ");
+            Console.Write("Ingrese el número de Función para consultar el detalle de Tickets: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
+            //Habría que ver si se ingresa un número de función mal. 
+
+
             Console.Clear();
-            Console.WriteLine("La lista de tickets según la función {0} es la siguiente", opcion);
             Console.WriteLine("");
+            Console.WriteLine("La lista de tickets según la función nº {0} es la siguiente", opcion);
+            Console.WriteLine("");
+
             foreach (var ticket in ConsultasDeTickets.buscarTicketPorFuncion(opcion))
             {
                 Console.WriteLine("\tNº de Ticket:\t{0}", ticket.TicketId);
@@ -208,7 +238,21 @@ namespace TrabajoPractico1
                 Console.WriteLine("");
             }
 
+            //this.presionarTecla();
+        }
 
+        public void presionarTecla()
+        {
+            Console.WriteLine("Presione cualquier tecla para volver al Menu Principal ");
+            do
+            {
+                //while (!Console.KeyAvailable)
+                //{
+                //    // Do something
+                //}
+            } while (!Console.KeyAvailable);
+        //} while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+            Console.Clear();
         }
     }
 }
