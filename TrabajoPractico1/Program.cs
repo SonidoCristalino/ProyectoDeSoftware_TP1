@@ -13,7 +13,7 @@ namespace TrabajoPractico1
             Console.WriteLine("");
             Console.WriteLine("\t\t\t*******************************************");
             Console.WriteLine("\t\t\t ¡Bienvenido a la cartelera del Cine UNAJ! \n");
-            Console.WriteLine("\t\t\t******************************************* \n");
+            Console.WriteLine("\t\t\t*******************************************");
 
             try
             {

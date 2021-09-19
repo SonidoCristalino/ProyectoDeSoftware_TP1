@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using TrabajoPractico1.Domain.Entities;
 
 namespace TrabajoPractico1
@@ -37,7 +38,7 @@ namespace TrabajoPractico1
 
             while (opcion != 5)
             {
-                
+                Console.WriteLine("");
                 Console.WriteLine("Elija una opción:");
                 Console.WriteLine("\t1. Ver las películas disponibles en cartelera. ");
                 Console.WriteLine("\t2. Ver las funciones disponibles para una película. ");
@@ -50,27 +51,30 @@ namespace TrabajoPractico1
                 switch (opcion)
                 {
                     case 1:
+
                         Console.Clear();
-                        Console.WriteLine("");
-                        Console.WriteLine("\t\t\t*******************************************");
-                        Console.WriteLine("\t\t\t* La cartelera disponible es la siguiente:*");
-                        Console.WriteLine("\t\t\t*******************************************\n");
                         this.opcion_Nro1();
                         break;
                     
                     case 2:
+                        
+                        Console.Clear();
                         this.opcion_Nro2();
                         break;
 
                     case 3:
-                        this.opcion_Nro1();
-                        Console.Write("Su opción es: " + opcion);
+                        
+                        Console.Clear();
+                        this.opcion_Nro3();
                         break;
+                    
                     case 4:
-                        Console.Write("Su opción es: " + opcion);
+
+                        this.opcion_Nro4();
                         break;
+                    
                     case 5:
-                        Console.Write("Su opción es: " + opcion);
+                        //Console.Write("Su opción es: " + opcion);
                         break;
                     default:
                         Console.WriteLine("ERROR: Opción inválida. Apriete cualquier número y vuelva a intentarlo");
@@ -83,11 +87,15 @@ namespace TrabajoPractico1
         public void opcion_Nro1()
         {
             
+            Console.WriteLine("");
+            Console.WriteLine("\t\t\t*******************************************");
+            Console.WriteLine("\t\t\t* La cartelera disponible es la siguiente:*");
+            Console.WriteLine("\t\t\t*******************************************\n");
+
             foreach (var pelicula in consultarPelicula.buscarTodasLasPeliculas())
             {
                 Console.WriteLine("\tPelicula nº " + pelicula.PeliculaId + ": " + pelicula.Titulo);
             }
-            Console.WriteLine("");
 
         }
 
@@ -96,41 +104,49 @@ namespace TrabajoPractico1
             int id_funcion = 0;
 
             this.opcion_Nro1();
-
-            Console.Write("Ingrese la película para ver sus funciones: ");
+            
+            Console.WriteLine("");
+            Console.Write("Ingrese el número de la película para ver sus funciones: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("");
-            Console.WriteLine("\t\t\t************************************************");
-            Console.WriteLine("\t\t\t* Las funciones disponibles para esa opción son:*");
-            Console.WriteLine("\t\t\t*************************************************\n");
+            bool hayFunciones = consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion).Any();
 
-            foreach (var funcion in consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion))
+            if (hayFunciones)
             {
-                Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
-                Console.WriteLine("\tSala nº:\t" + funcion.SalaId);
-                Console.WriteLine("\tDía:\t\t{0:d}", funcion.Fecha);
-                Console.WriteLine("\tHorario:\t" + funcion.Horario.ToString(@"hh\:mm"));
-                id_funcion = funcion.FuncionId;
+
+                //Ver si no habría que separarla en un método a parte a esta vista
+                Console.WriteLine("");
+                Console.WriteLine("\t\t\t************************************************");
+                Console.WriteLine("\t\t\t* Las funciones disponibles para esa opción son:*");
+                Console.WriteLine("\t\t\t*************************************************\n");
+
+                foreach (var funcion in consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion))
+                {
+                    Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
+                    Console.WriteLine("\tSala nº:\t" + funcion.SalaId);
+                    Console.WriteLine("\tDía:\t\t{0:d}", funcion.Fecha);
+                    Console.WriteLine("\tHorario:\t" + funcion.Horario.ToString(@"hh\:mm"));
+                    id_funcion = funcion.FuncionId;
+                }
+
             }
-
-            Console.WriteLine("");
-            Console.Write("¿Desea sacar un ticket para esta función?(S/N)");
-            string respuestaNuevoTicket = Console.ReadLine();
-
-            if ( respuestaNuevoTicket.Equals("s") || respuestaNuevoTicket.Equals("S") )
+            else
             {
-                this.opcion_Nro3(id_funcion);
+                Console.WriteLine("");
+                Console.WriteLine("No hay funciones disponibles para la película seleccionada. Por favor intente con otra opción\n");
             }
            
         }
 
-        public void opcion_Nro3(int idFuncion)
+        //public void opcion_Nro3(int idFuncion)
+        public void opcion_Nro3()
         {
             
             int salaID = 0;
             int capacidad = 0;
             int TicketXFuncion= 0;
+
+            this.opcion_Nro1();
 
             Console.Write("Ingrese la Función a la que quiere asistir: ");
             opcion = Convert.ToInt32(Console.ReadLine());
@@ -157,6 +173,41 @@ namespace TrabajoPractico1
             {
                 Console.WriteLine("La Función está completa. Intente en otro momento.");
             }
+
+        }
+
+        public void opcion_Nro4()
+        {
+            //Ver si no habría que separarla en un método a parte a esta vista
+            Console.WriteLine("");
+            Console.WriteLine("\t\t\t************************************************");
+            Console.WriteLine("\t\t\t* Las funciones disponibles son las siguientes:*");
+            Console.WriteLine("\t\t\t************************************************\n");
+
+            foreach (var funcion in consultasDeFunciones.ObtenerTodasLasFunciones())
+            {
+                Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
+                Console.WriteLine("\tSala nº:\t" + funcion.SalaId);
+                Console.WriteLine("\tDía:\t\t{0:d}", funcion.Fecha);
+                Console.WriteLine("\tHorario:\t" + funcion.Horario.ToString(@"hh\:mm"));
+                Console.WriteLine("");
+            }
+            
+            Console.WriteLine("");
+            Console.Write("¿Por cuál Función desea consultar los tickets?: ");
+            opcion = Convert.ToInt32(Console.ReadLine());
+
+            Console.Clear();
+            Console.WriteLine("La lista de tickets según la función {0} es la siguiente", opcion);
+            Console.WriteLine("");
+            foreach (var ticket in ConsultasDeTickets.buscarTicketPorFuncion(opcion))
+            {
+                Console.WriteLine("\tNº de Ticket:\t{0}", ticket.TicketId);
+                Console.WriteLine("\tFunción nº:\t" + ticket.FuncionId);
+                Console.WriteLine("\tA nombre de:\t" + ticket.Usuario);
+                Console.WriteLine("");
+            }
+
 
         }
     }

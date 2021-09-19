@@ -43,5 +43,15 @@ namespace TrabajoPractico1.AccessData.Queries
             }
 
         }
+        public IList<Funciones> ObtenerTodasLasFunciones()
+        {
+            using (var cine = new CineDbContext())
+            {
+                var seleccion = cine.Funciones.ToList();
+
+                return seleccion;
+            }
+
+        }
     }
 }
