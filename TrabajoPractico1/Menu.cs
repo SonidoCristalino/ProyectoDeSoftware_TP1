@@ -59,15 +59,12 @@ namespace TrabajoPractico1
                     case 2:
                         
                         Console.Clear();
-                        //this.opcion_Nro1();
                         this.opcion_Nro2();
                         break;
 
                     case 3:
                         
                         Console.Clear();
-                        //this.opcion_Nro1();
-                        //this.opcion_Nro2();
                         this.opcion_Nro3();
                         break;
                     
@@ -181,23 +178,9 @@ namespace TrabajoPractico1
             opcion = Convert.ToInt32(Console.ReadLine());
 
             //Habría que ver si se ingresa un número de función mal. 
+            
+            this.VistaDeTicket(opcion);
 
-            //Habría que mover la Vista de Tickets también
-
-            Console.Clear();
-            Console.WriteLine("");
-            Console.WriteLine("La lista de tickets según la función nº {0} es la siguiente", opcion);
-            Console.WriteLine("");
-
-            foreach (var ticket in ConsultasDeTickets.buscarTicketPorFuncion(opcion))
-            {
-                Console.WriteLine("\tNº de Ticket:\t{0}", ticket.TicketId);
-                Console.WriteLine("\tFunción nº:\t" + ticket.FuncionId);
-                Console.WriteLine("\tA nombre de:\t" + ticket.Usuario);
-                Console.WriteLine("");
-            }
-
-            //this.presionarTecla();
         }
 
         public void presionarTecla()
@@ -306,6 +289,21 @@ namespace TrabajoPractico1
                     Console.WriteLine("");
                 }
 
+            }
+        }
+        public void VistaDeTicket(int ticketID)
+        {
+            Console.Clear();
+            Console.WriteLine("");
+            Console.WriteLine("La lista de tickets según la función nº {0} es la siguiente", ticketID);
+            Console.WriteLine("");
+
+            foreach (var ticket in ConsultasDeTickets.buscarTicketPorFuncion(ticketID))
+            {
+                Console.WriteLine("\tNº de Ticket:\t{0}", ticket.TicketId);
+                Console.WriteLine("\tFunción nº:\t" + ticket.FuncionId);
+                Console.WriteLine("\tA nombre de:\t" + ticket.Usuario);
+                Console.WriteLine("");
             }
         }
     }
