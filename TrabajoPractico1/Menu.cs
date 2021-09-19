@@ -83,11 +83,6 @@ namespace TrabajoPractico1
         public void opcion_Nro1()
         {
             
-            //Console.Clear();
-            //Console.WriteLine("");
-            //Console.WriteLine("\t\t\t*******************************************");
-            //Console.WriteLine("\t\t\t* La cartelera disponible es la siguiente:*");
-            //Console.WriteLine("\t\t\t*******************************************\n");
             foreach (var pelicula in consultarPelicula.buscarTodasLasPeliculas())
             {
                 Console.WriteLine("\tPelicula nº " + pelicula.PeliculaId + ": " + pelicula.Titulo);
@@ -99,17 +94,17 @@ namespace TrabajoPractico1
         public void opcion_Nro2()
         {
             int id_funcion = 0;
-          //int id_pelicula = 0;
 
             this.opcion_Nro1();
 
             Console.Write("Ingrese la película para ver sus funciones: ");
             opcion = Convert.ToInt32(Console.ReadLine());
-            
+
             Console.WriteLine("");
             Console.WriteLine("\t\t\t************************************************");
             Console.WriteLine("\t\t\t* Las funciones disponibles para esa opción son:*");
             Console.WriteLine("\t\t\t*************************************************\n");
+
             foreach (var funcion in consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion))
             {
                 Console.WriteLine("\tFunción nº:\t{0}", funcion.PeliculaId);
@@ -117,21 +112,17 @@ namespace TrabajoPractico1
                 Console.WriteLine("\tDía:\t\t{0:d}", funcion.Fecha);
                 Console.WriteLine("\tHorario:\t" + funcion.Horario.ToString(@"hh\:mm"));
                 id_funcion = funcion.FuncionId;
-                //id_pelicula = funcion.PeliculaId;
             }
+
             Console.WriteLine("");
-            Console.WriteLine("¿Desea sacar un ticket para esta función?(S/N)");
-            opcion = Convert.ToInt32(Console.ReadLine());
+            Console.Write("¿Desea sacar un ticket para esta función?(S/N)");
+            string respuestaNuevoTicket = Console.ReadLine();
 
-            if (opcion == 'S' || opcion == 's')
+            if ( respuestaNuevoTicket.Equals("s") || respuestaNuevoTicket.Equals("S") )
             {
-                //this.opcion_Nro3(id_funcion);
+                this.opcion_Nro3(id_funcion);
             }
-            //else
-            //{
-
-            //}
-
+           
         }
 
         public void opcion_Nro3(int idFuncion)
@@ -140,9 +131,6 @@ namespace TrabajoPractico1
             int salaID = 0;
             int capacidad = 0;
             int TicketXFuncion= 0;
-
-            //Para obtener un ticket hay que: 
-            //1. Contar los tickets que hay asociados a la función
 
             Console.Write("Ingrese la Función a la que quiere asistir: ");
             opcion = Convert.ToInt32(Console.ReadLine());
@@ -154,13 +142,16 @@ namespace TrabajoPractico1
             salaID = consultasDeFunciones.ObtenerFuncionPorID(opcion).SalaId;
             
             //Se lee la capacidad asociada a la Sala
-            capacidad = ConsultasDeSalas.buscarSalaPorID(opcion).Capacidad;
-
+            capacidad = ConsultasDeSalas.buscarSalaPorID(salaID).Capacidad;
 
             //Comparamos para ver si es posible obtener un nuevo ticket
             if (TicketXFuncion < capacidad)
             {
+                Console.Write("\nIngrese su nombre para generar su nuevo ticket: ");
+                string nombreUsuario = Console.ReadLine();
+
                 //Creamos un nuevo ticket
+                TicketsABM.AltaTicket(Guid.NewGuid(), opcion, nombreUsuario);
             }
             else
             {
