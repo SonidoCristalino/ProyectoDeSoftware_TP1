@@ -6,18 +6,6 @@ namespace TrabajoPractico1.AccessData.Queries
 {
     public class ConsultasDeSalas
     {
-        public IList<Salas> buscarSalaSPorID(int salasID)
-        {
-            using (var cine = new CineDbContext())
-            {
-                var selecccion = cine.Salas
-                    .Where(Sala => Sala.SalaId == salasID)
-                    .ToList();
-
-                return selecccion;
-            }
-
-        }
 
         public Salas buscarSalaPorID(int salaID)
         {
