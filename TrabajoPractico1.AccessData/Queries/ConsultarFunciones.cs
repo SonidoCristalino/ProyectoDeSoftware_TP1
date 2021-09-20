@@ -84,5 +84,21 @@ namespace TrabajoPractico1.AccessData.Queries
             }
 
         }
+
+        public IList<Funciones> ObtenerTodasLasFuncionesOrdenadas()
+        {
+            using (var cine = new CineDbContext())
+            {
+                List<Funciones> seleccion = cine.Funciones
+                    .OrderBy(o => o.FuncionId)
+                    .ToList();
+                
+                return seleccion;
+            }
+
+        }
+
+
+
     }
 }

@@ -218,35 +218,46 @@ namespace TrabajoPractico1
 
             //Calculamos el tiempo necesario para poder realizar la consulta 
             TimeSpan duracion = new TimeSpan(2, 30, 0);
-            TimeSpan horaFuncionMin = new TimeSpan(horaFuncion, minutosFuncion, 00);
-            TimeSpan horaFuncionMax = horaFuncionMin.Add(duracion);
+            TimeSpan inicioNuevaFuncion = new TimeSpan(horaFuncion, minutosFuncion, 00);
+            TimeSpan finFuncionNueva = inicioNuevaFuncion.Add(duracion);
 
-            //Console.WriteLine("\n\tLa fecha ingresada fue: " + fechaFuncion);
-            Console.WriteLine("\n\tLa fecha ingresada fue: " + fechaFuncion.ToString("d", CultureInfo.CreateSpecificCulture("de-DE")));
-            Console.WriteLine("\tLa hora minima fue: " + horaFuncionMin);
-            Console.WriteLine("\tLa hora maxima fue: " + horaFuncionMax);
-
-            bool existeDisponibilidadSala = true;
+            bool solapamientoDeFunciones = false;
 
             foreach (var funcion in consultasDeFunciones.
                 ObtenerFuncionesPorFecha(salaID, fechaFuncion))
             {
                 TimeSpan horarioFin = funcion.Horario.Add(duracion);
-                
-                if ((horaFuncionMin >= funcion.Horario && horaFuncionMin <= horarioFin) 
-                    && (horaFuncionMax >= funcion.Horario && horaFuncionMax <= horarioFin) )
+
+                if ((inicioNuevaFuncion >= funcion.Horario && inicioNuevaFuncion <= horarioFin)
+                    || (finFuncionNueva >= funcion.Horario && finFuncionNueva <= horarioFin))
                 {
-                    existeDisponibilidadSala = true;
+                    solapamientoDeFunciones = true;
                 }
             }
 
-            if (existeDisponibilidadSala)
+            if (solapamientoDeFunciones)
             {
-                Console.Write("\n\t¡Existe ya una función en ese horario!\n");
+                Console.Write("\n\t¡Existe un solapamiento con otras funciones. IMPOSIBLE de generarla!\n");
             }
             else
             {
-                Console.Write("\n\t¡NOOOOOOO Existe una función en ese horario!\n");
+
+                //Creamos el contexto para generar un nuevo Ticket y luego lo creamos
+                TrabajoPractico1.AccessData.Commands.FuncionesABM nuevaFuncion =
+                    new AccessData.Commands.FuncionesABM();
+
+                var cine = new TrabajoPractico1.AccessData.CineDbContext();
+
+                cine.Funciones.Add(nuevaFuncion.AltaFunciones(peliculaID, salaID, fechaFuncion, inicioNuevaFuncion));
+                cine.SaveChanges();
+
+                Console.Write("\n\t¡Función generada con EXITO!\n");
+                Console.Write("\n\t¡Detalle de la nueva Función: !\n");
+                Console.Write("\n\t\tPelícula nº...... {0}", peliculaID);
+                Console.Write("\n\t\tSala nº.......... {0}", salaID);
+                Console.Write("\n\t\tFecha............ {0:dd}/{0:MM}/{0:yyyy}", fechaFuncion);
+                Console.Write("\n\t\tHorario.......... {0:hh}:{0:mm}hs\n", inicioNuevaFuncion);
+
             }
         }
 
