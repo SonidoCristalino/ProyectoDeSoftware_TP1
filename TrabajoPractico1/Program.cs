@@ -19,10 +19,11 @@ namespace TrabajoPractico1
             {
                 Menu menu = new Menu(opcion);
             }
-            catch (Exception valor)
+            catch (FormatException)
             {
-                Console.WriteLine(valor.ToString());
-                throw;
+
+                Console.WriteLine("\n¡ERROR!: Se ingresó mal el dato, por favor intente nuevamente en otra ocasión. \n");
+                return;
             }
 
         }

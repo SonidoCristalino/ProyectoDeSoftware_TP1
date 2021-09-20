@@ -30,5 +30,17 @@ namespace TrabajoPractico1.AccessData.Queries
 
             }
         }
+
+        public IList<Salas> buscarTodasLasSalas()
+        {
+            using (var cine = new CineDbContext())
+            {
+
+                var seleccion = cine.Salas.ToList();
+
+                return seleccion;
+            }
+
+        }
     }
 }

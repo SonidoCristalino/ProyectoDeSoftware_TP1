@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using TrabajoPractico1.Domain.Entities;
 
@@ -48,6 +49,36 @@ namespace TrabajoPractico1.AccessData.Queries
             using (var cine = new CineDbContext())
             {
                 var seleccion = cine.Funciones.ToList();
+
+                return seleccion;
+            }
+
+        }
+
+        public IList<Funciones> ObtenerFuncionesPorFechaYHora(int salaID, DateTime fecha, TimeSpan horaMin, TimeSpan horaMax)
+        {
+            using (var cine = new CineDbContext())
+            {
+                var seleccion = cine.Funciones
+                    .Where(Funcion => Funcion.FuncionId == salaID
+                        && Funcion.Fecha == fecha 
+                        && Funcion.Horario >= horaMin
+                        && Funcion.Horario <= horaMax)
+                    .ToList();
+
+                return seleccion;
+            }
+
+        }
+
+        public IList<Funciones> ObtenerFuncionesPorFecha(int salaID, DateTime fecha)
+        {
+            using (var cine = new CineDbContext())
+            {
+                var seleccion = cine.Funciones
+                    .Where(Funcion => Funcion.FuncionId == salaID
+                        && Funcion.Fecha == fecha)
+                    .ToList();
 
                 return seleccion;
             }
