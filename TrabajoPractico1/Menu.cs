@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using TrabajoPractico1.Domain.Entities;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrabajoPractico1
 {
@@ -279,7 +280,15 @@ namespace TrabajoPractico1
                 var cine = new TrabajoPractico1.AccessData.CineDbContext();
 
                 cine.Funciones.Add(nuevaFuncion.AltaFunciones(peliculaID, salaID, fechaFuncion, inicioNuevaFuncion));
-                cine.SaveChanges();
+                try
+                {
+                    cine.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    Console.Write("\n\tERROR: Se ingresó un valor inválido. La función NO ha sido creada.\n");
+                    return;
+                }
 
                 Console.Write("\n\t¡Función generada con EXITO!\n");
                 Console.Write("\n\t¡Detalle de la nueva Función: !\n");

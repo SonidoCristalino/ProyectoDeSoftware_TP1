@@ -85,25 +85,6 @@ namespace TrabajoPractico1.AccessData
 
             );
 
-            //======================================================= Datos cargados para Testing =======================================================
-
-            modelBuilder.Entity<Funciones>().HasData(
-                new Funciones { FuncionId = 1, PeliculaId = 1, SalaId = 1, Fecha = Convert.ToDateTime("2021-09-06"), Horario = new TimeSpan(10,30,00)},
-                new Funciones { FuncionId = 2, PeliculaId = 2, SalaId = 2, Fecha = Convert.ToDateTime("2021-09-12"), Horario = new TimeSpan(12, 30, 00)},
-                new Funciones { FuncionId = 3, PeliculaId = 5, SalaId = 3, Fecha = Convert.ToDateTime("2021-09-15"), Horario = new TimeSpan(09, 15, 00) }
-            );
-
-            modelBuilder.Entity<Tickets>().HasData(
-                new Tickets { FuncionId = 1, TicketId = Guid.NewGuid(), Usuario = "Emiliano" },
-                new Tickets { FuncionId = 1, TicketId = Guid.NewGuid(), Usuario = "Marcelo" },
-                new Tickets { FuncionId = 1, TicketId = Guid.NewGuid(), Usuario = "Beatriz" },
-                new Tickets { FuncionId = 1, TicketId = Guid.NewGuid(), Usuario = "Mailen" },
-                new Tickets { FuncionId = 1, TicketId = Guid.NewGuid(), Usuario = "Melisa" },
-                new Tickets { FuncionId = 2, TicketId = Guid.NewGuid(), Usuario = "Maria" },
-                new Tickets { FuncionId = 3, TicketId = Guid.NewGuid(), Usuario = "Florencia" }
-            );
-
-
             ;
 
         }
