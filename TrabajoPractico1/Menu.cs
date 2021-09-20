@@ -7,10 +7,13 @@ using System.Globalization;
 
 namespace TrabajoPractico1
 {
-    class Menu
+    public class Menu
     {
 
         private int opcion;
+        private int rangoPeliculas;
+        private int rangoSalas;
+
 
         TrabajoPractico1.AccessData.Queries.ConsultasDePeliculas consultarPelicula =
             new TrabajoPractico1.AccessData.Queries.ConsultasDePeliculas();
@@ -27,9 +30,12 @@ namespace TrabajoPractico1
         TrabajoPractico1.AccessData.Commands.TicketsABM TicketsABM =
             new AccessData.Commands.TicketsABM();
 
+            
         public Menu(int valor)
         {
             opcion = valor;
+            rangoPeliculas = consultarPelicula.buscarTodasLasPeliculas().Count();
+            rangoSalas = ConsultasDeSalas.buscarTodasLasSalas().Count();
 
             this.menuPrincipal(opcion);
         }
@@ -87,7 +93,7 @@ namespace TrabajoPractico1
                         break;
 
                     default:
-                        Console.WriteLine("ERROR: Opción inválida. Apriete cualquier número y vuelva a intentarlo");
+                        Console.WriteLine("\n\tERROR: Opción inválida. Intentelo de nuevo.");
                         break;
                 }
 
@@ -103,6 +109,11 @@ namespace TrabajoPractico1
             Console.Write("Ingrese el número de la Película para ver su información: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
+            if (!(this.validarIngreso(opcion, rangoPeliculas)))
+            {
+                return;
+            }
+
             this.VistaDePeliculas(opcion);
 
         }
@@ -116,6 +127,11 @@ namespace TrabajoPractico1
             Console.Write("Ingrese el número de la Película para ver sus funciones: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
+            if (!(this.validarIngreso(opcion, rangoPeliculas)))
+            {
+                return;
+            }
+
             bool hayFunciones = consultasDeFunciones.BuscarFuncionesPorPeliculaID(opcion).Any();
 
             if (hayFunciones)
@@ -124,7 +140,7 @@ namespace TrabajoPractico1
             }else
             {
                 Console.WriteLine("");
-                Console.WriteLine("No hay funciones disponibles para la película seleccionada. Por favor intente con otra opción\n");
+                Console.WriteLine("No hay funciones disponibles para la película seleccionada. Por favor intente con otra opción.\n");
             }
            
         }
@@ -177,7 +193,7 @@ namespace TrabajoPractico1
 
             }else
             {
-                Console.WriteLine("La Función está completa. Intente en otro momento.");
+                Console.WriteLine("\n\tLa Función se encuentra AGOTADA. Intente en otro momento o con otra Función.");
             }
 
         }
@@ -190,8 +206,13 @@ namespace TrabajoPractico1
             Console.Write("Ingrese el número de Función para consultar el detalle de sus Tickets: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
-            //Habría que ver si se ingresa un número de función mal. 
-            //lo que se podría hacer es agarrar todos los ID de cada función y ponerlos en un Array, si no es alguno de esos, error!
+            int rangoFunciones = consultasDeFunciones.ObtenerTodasLasFunciones().Count();
+
+            if (!(this.validarIngreso(opcion, rangoFunciones)))
+            {
+                return;
+            }
+
             this.VistaDeTicket(opcion);
 
         }
@@ -202,10 +223,19 @@ namespace TrabajoPractico1
             this.VistaDeCartelera();
             this.VistaDeSalas();
 
-            Console.Write("Con los datos descriptos anteriormente, ingrese el número de película deseado: ");
+            Console.Write("Con los datos descriptos anteriormente, ingrese el Número de PELÍCULA deseado: ");
             int peliculaID = int.Parse(Console.ReadLine());
-            Console.Write("Ingrese el nº de Sala donde quiere proyectar la película deseada: ");
+            if ( !(this.validarIngreso(peliculaID, rangoPeliculas)) )
+            {
+                return;
+            }
+
+            Console.Write("Ingrese el Núermo de SALA donde quiere proyectar la película: ");
             int salaID = int.Parse(Console.ReadLine());
+            if (!(this.validarIngreso(salaID, rangoSalas)))
+            {
+                return;
+            }
 
             Console.Write("\tIngrese la fecha de la función (AAAA/MM/DD): ");
             DateTime fechaFuncion = Convert.ToDateTime(Console.ReadLine());
@@ -261,20 +291,6 @@ namespace TrabajoPractico1
             }
         }
 
-        public void presionarTecla()
-        {
-            Console.WriteLine("Presione cualquier tecla para volver al Menu Principal ");
-            do
-            {
-                //while (!Console.KeyAvailable)
-                //{
-                //    // Do something
-                //}
-            } while (!Console.KeyAvailable);
-        //} while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-            Console.Clear();
-        }
-
         public void VistaDeCartelera()
         {
             Console.WriteLine("");
@@ -308,7 +324,6 @@ namespace TrabajoPractico1
         
         public void VistaDeFunciones(int funcionID)
         {
-            //Vista de usuario para listar la información de las Funciones.
             //Si es 0 lista todas, caso contrario lista la/s funcion/es que tengan esa película
 
             Console.WriteLine("");
@@ -398,5 +413,20 @@ namespace TrabajoPractico1
                 Console.WriteLine("\tCapacidad.... {0} personas\n", salas.Capacidad);
             }
         }
+
+        public bool validarIngreso(int dato, int rangoDeValores)
+        {
+            if (!(dato >= 1 && dato <= rangoDeValores))
+            {
+                Console.Write("\n\tERROR: El rango ingresado NO es válido. Intentelo en otra ocasión.\n");
+                return false;
+            }
+            else
+            {
+                return true;
+           }
+        }
+
+
     }
 }

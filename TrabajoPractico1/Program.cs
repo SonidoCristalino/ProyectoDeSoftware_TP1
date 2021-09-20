@@ -22,7 +22,7 @@ namespace TrabajoPractico1
             catch (FormatException)
             {
 
-                Console.WriteLine("\n¡ERROR!: Se ingresó mal el dato, por favor intente nuevamente en otra ocasión. \n");
+                Console.WriteLine("\n\t¡ERROR!: Se ingresó mal el dato, por favor intente nuevamente en otra ocasión. \n");
                 return;
             }
 
