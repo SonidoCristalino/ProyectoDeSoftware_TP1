@@ -55,32 +55,32 @@ namespace TrabajoPractico1
                     case 1:
 
                         Console.Clear();
-                        this.opcion_Nro1();
+                        this.ListarPeliculasDisponibles();
                         break;
                     
                     case 2:
                         
                         Console.Clear();
-                        this.opcion_Nro2();
+                        this.ListarFuncionesDisponibles();
                         break;
 
                     case 3:
 
                         Console.Clear();
-                        this.crearFuncion();
+                        this.CrearFunciones();
                         //Console.WriteLine("Usted está creando una función\n");
                         break;
 
                     case 4:
                         
                         Console.Clear();
-                        this.opcion_Nro3();
+                        this.ObtenerTicketParaFuncion();
                         break;
                     
                     case 5:
 
                         Console.Clear();
-                        this.opcion_Nro4();
+                        this.ListarDisponibilidadTickets();
                         break;
                     
                     case 6:
@@ -94,7 +94,7 @@ namespace TrabajoPractico1
             }
         }
 
-        public void opcion_Nro1()
+        public void ListarPeliculasDisponibles()
         {
 
             this.VistaDeCartelera();
@@ -107,7 +107,7 @@ namespace TrabajoPractico1
 
         }
 
-        public void opcion_Nro2()
+        public void ListarFuncionesDisponibles()
         {
 
             this.VistaDeCartelera();
@@ -129,7 +129,7 @@ namespace TrabajoPractico1
            
         }
 
-        public void opcion_Nro3()
+        public void ObtenerTicketParaFuncion()
         {
             
             int salaID = 0;
@@ -182,7 +182,7 @@ namespace TrabajoPractico1
 
         }
 
-        public void opcion_Nro4()
+        public void ListarDisponibilidadTickets()
         {
             this.VistaDeFunciones(0);
             
@@ -196,7 +196,7 @@ namespace TrabajoPractico1
 
         }
 
-        public void crearFuncion()
+        public void CrearFunciones()
         {
 
             this.VistaDeCartelera();
@@ -343,26 +343,28 @@ namespace TrabajoPractico1
 
             }else
             {
-                Funciones funcion = consultasDeFunciones.ObtenerFuncionPorID(funcionID);
-                
-                int CantTicketsFuncion = ConsultasDeTickets.buscarTicketPorFuncion(funcion.FuncionId).Count();
-                int capacidadSala = ConsultasDeSalas.buscarSalaPorID(funcion.SalaId).Capacidad;
-                string nombrePelicula = consultarPelicula.buscarPeliculaPorId(funcion.PeliculaId).Titulo;
-                string mensajeAgotado = "";
 
-                if (CantTicketsFuncion == capacidadSala)
+                foreach (var funcion in consultasDeFunciones.BuscarFuncionesPorPeliculaID(funcionID))
                 {
-                    mensajeAgotado = " (¡¡FUNCIÓN AGOTADA!!)";
-                }
+                    int CantTicketsFuncion = ConsultasDeTickets.buscarTicketPorFuncion(funcion.FuncionId).Count();
+                    int capacidadSala = ConsultasDeSalas.buscarSalaPorID(funcion.SalaId).Capacidad;
+                    string nombrePelicula = consultarPelicula.buscarPeliculaPorId(funcion.PeliculaId).Titulo;
+                    string mensajeAgotado = "";
 
-                Console.WriteLine("\tFunción nº:.......... {0}", funcion.FuncionId);
-                Console.WriteLine("\tPelícula nº:......... {0} - {1}", funcion.PeliculaId, nombrePelicula);
-                Console.WriteLine("\tTickets Vendidos:.... {0}{1}", CantTicketsFuncion, mensajeAgotado);
-                Console.WriteLine("\tSala nº:............. {0}", funcion.SalaId);
-                Console.WriteLine("\tCapacidad............ {0} personas", capacidadSala);
-                Console.WriteLine("\tDía:................. {0:d}", funcion.Fecha);
-                Console.WriteLine("\tHorario:............. {0} hs.", funcion.Horario.ToString(@"hh\:mm"));
-                Console.WriteLine("");
+                    if (CantTicketsFuncion == capacidadSala)
+                    {
+                        mensajeAgotado = " (¡¡FUNCIÓN AGOTADA!!)";
+                    }
+
+                    Console.WriteLine("\tFunción nº:.......... {0}", funcion.FuncionId);
+                    Console.WriteLine("\tPelícula nº:......... {0} - {1}", funcion.PeliculaId, nombrePelicula);
+                    Console.WriteLine("\tTickets Vendidos:.... {0}{1}", CantTicketsFuncion, mensajeAgotado);
+                    Console.WriteLine("\tSala nº:............. {0}", funcion.SalaId);
+                    Console.WriteLine("\tCapacidad............ {0} personas", capacidadSala);
+                    Console.WriteLine("\tDía:................. {0:d}", funcion.Fecha);
+                    Console.WriteLine("\tHorario:............. {0} hs.", funcion.Horario.ToString(@"hh\:mm"));
+                    Console.WriteLine("");
+                }
 
             }
         }
