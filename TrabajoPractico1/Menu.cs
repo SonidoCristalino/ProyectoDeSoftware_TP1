@@ -40,7 +40,7 @@ namespace TrabajoPractico1
             {
                 Console.WriteLine("");
                 Console.WriteLine("Elija una opción:");
-                Console.WriteLine("\t1. Ver las películas disponibles en cartelera. ");
+                Console.WriteLine("\t1. Ver las películas disponibles en cartelera y su información. ");
                 Console.WriteLine("\t2. Ver las funciones disponibles para una película. ");
                 Console.WriteLine("\t3. Obtener un ticket para una función.");
                 Console.WriteLine("\t4. Ver la disponibilidad de tickets para las funciones. ");
@@ -144,6 +144,7 @@ namespace TrabajoPractico1
             //Comparamos para ver si es posible obtener un nuevo ticket
             if (TicketXFuncion < capacidad)
             {
+
                 Console.Write("\nIngrese su nombre para generar su nuevo ticket: ");
                 string nombreUsuario = Console.ReadLine();
 
@@ -158,9 +159,11 @@ namespace TrabajoPractico1
                 cine.Tickets.Add(nuevoTicket.AltaTicket(nuevoTicketID, opcion, nombreUsuario));
                 cine.SaveChanges();
 
-                Console.WriteLine("El ticket se ha creado exitosamente: ");
-                Console.WriteLine("\tNúmero de ticket: {0}", nuevoTicketID.ToString());
-                Console.WriteLine("\tAsociado al nombre: {0}", nombreUsuario);
+                Console.Clear();
+                Console.WriteLine("\n¡El ticket se ha creado exitosamente!\n");
+                Console.WriteLine("\tDetalle:");
+                Console.WriteLine("\t\tNúmero de ticket:\t{0}", nuevoTicketID.ToString());
+                Console.WriteLine("\t\tAsociado al nombre:\t{0}", nombreUsuario);
 
             }else
             {
@@ -174,11 +177,10 @@ namespace TrabajoPractico1
             this.VistaDeFunciones(0);
             
             Console.WriteLine("");
-            Console.Write("Ingrese el número de Función para consultar el detalle de Tickets: ");
+            Console.Write("Ingrese el número de Función para consultar el detalle de sus Tickets: ");
             opcion = Convert.ToInt32(Console.ReadLine());
 
             //Habría que ver si se ingresa un número de función mal. 
-            
             this.VistaDeTicket(opcion);
 
         }
@@ -295,7 +297,7 @@ namespace TrabajoPractico1
         {
             Console.Clear();
             Console.WriteLine("");
-            Console.WriteLine("La lista de tickets según la función nº {0} es la siguiente", ticketID);
+            Console.WriteLine("La lista de tickets según la Función nº {0} es la siguiente:", ticketID);
             Console.WriteLine("");
 
             foreach (var ticket in ConsultasDeTickets.buscarTicketPorFuncion(ticketID))
